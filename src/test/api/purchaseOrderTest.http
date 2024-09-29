@@ -1,0 +1,34 @@
+###GET all PurchaseOrders
+GET localhost:8080/api/purchaseOrders
+
+###POST new order
+POST http://localhost:8080/api/purchaseOrders
+Content-Type: application/json
+
+{
+  "poNumber": "PO12345",
+  "buyerId": 1,
+  "buyerName": "Buyer Name",
+  "buyerAddress": "Buyer Address",
+  "sellerId": 1,
+  "sellerName": "Seller Name",
+  "sellerAddress": "Seller Address",
+  "date": "2024-09-29T00:00:00",
+  "orderLines": [
+    {
+      "amount": 10,
+      "material": {
+        "materialId": 1,
+        "name": "Steel"
+      }
+    },
+    {
+      "amount": 5,
+      "material": {
+        "materialId": 2,
+        "name": "Wood"
+      }
+    }
+  ],
+  "vesselNumber": "VN56789"
+}
