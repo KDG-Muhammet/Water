@@ -1,6 +1,6 @@
 package be.kdg.sa.domain;
 
-public enum Type {
+public enum MaterialType {
     GIPS,
     IJZERERTS,
     CEMENT,
