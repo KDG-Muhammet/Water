@@ -11,13 +11,14 @@ import java.util.UUID;
 public class PurchaseOrder {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID referenceUUID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int referenceUUID;
     private String poNumber;
     private Date purchaseDate;
     private String vesselNumber;
 
-    //private Seller seller;
+    @ManyToOne
+    private Seller seller;
     @ManyToOne
     private Buyer buyer;
 
@@ -25,12 +26,25 @@ public class PurchaseOrder {
     @OneToMany(mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
     private List<OrderLine> orderLines  = new ArrayList<>();
 
+    public PurchaseOrder(int referenceUUID, String poNumber, Date purchaseDate, String vesselNumber, Seller seller, Buyer buyer, List<OrderLine> orderLines) {
+        this.referenceUUID = referenceUUID;
+        this.poNumber = poNumber;
+        this.purchaseDate = purchaseDate;
+        this.vesselNumber = vesselNumber;
+        this.seller = seller;
+        this.buyer = buyer;
+        this.orderLines = orderLines;
+    }
 
-    public UUID getReferenceUUID() {
+    public PurchaseOrder() {
+
+    }
+
+    public int getReferenceUUID() {
         return referenceUUID;
     }
 
-    public void setReferenceUUID(UUID referenceUUID) {
+    public void setReferenceUUID(int referenceUUID) {
         this.referenceUUID = referenceUUID;
     }
 
@@ -72,5 +86,13 @@ public class PurchaseOrder {
 
     public void setOrderLines(List<OrderLine> orderLines) {
         this.orderLines = orderLines;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
     }
 }

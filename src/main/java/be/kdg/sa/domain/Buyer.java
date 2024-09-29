@@ -7,17 +7,27 @@ import java.util.UUID;
 @Entity
 public class Buyer {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String name;
     private String address;
 
+    public Buyer(int id, String name, String address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
 
-    public UUID getId() {
+    public Buyer() {
+
+    }
+
+
+    public int getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 
