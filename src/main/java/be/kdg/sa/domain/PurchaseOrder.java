@@ -11,41 +11,19 @@ import java.util.UUID;
 public class PurchaseOrder {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int referenceUUID;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID referenceUUID;
+
+    @Column(unique = true)
     private String poNumber;
-    private Date purchaseDate;
     private String vesselNumber;
 
-    @ManyToOne
-    private Seller seller;
-    @ManyToOne
-    private Buyer buyer;
-
-    //    private OrderLine[] orderLines;
-    @OneToMany(mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
-    private List<OrderLine> orderLines  = new ArrayList<>();
-
-    public PurchaseOrder(int referenceUUID, String poNumber, Date purchaseDate, String vesselNumber, Seller seller, Buyer buyer, List<OrderLine> orderLines) {
-        this.referenceUUID = referenceUUID;
+    public PurchaseOrder(String poNumber, String vesselNumber) {
         this.poNumber = poNumber;
-        this.purchaseDate = purchaseDate;
         this.vesselNumber = vesselNumber;
-        this.seller = seller;
-        this.buyer = buyer;
-        this.orderLines = orderLines;
     }
 
     public PurchaseOrder() {
-
-    }
-
-    public int getReferenceUUID() {
-        return referenceUUID;
-    }
-
-    public void setReferenceUUID(int referenceUUID) {
-        this.referenceUUID = referenceUUID;
     }
 
     public String getPoNumber() {
@@ -56,13 +34,6 @@ public class PurchaseOrder {
         this.poNumber = poNumber;
     }
 
-    public Date getPurchaseDate() {
-        return purchaseDate;
-    }
-
-    public void setPurchaseDate(Date purchaseDate) {
-        this.purchaseDate = purchaseDate;
-    }
 
     public String getVesselNumber() {
         return vesselNumber;
@@ -72,27 +43,4 @@ public class PurchaseOrder {
         this.vesselNumber = vesselNumber;
     }
 
-    public Buyer getBuyer() {
-        return buyer;
-    }
-
-    public void setBuyer(Buyer buyer) {
-        this.buyer = buyer;
-    }
-
-    public List<OrderLine> getOrderLines() {
-        return orderLines;
-    }
-
-    public void setOrderLines(List<OrderLine> orderLines) {
-        this.orderLines = orderLines;
-    }
-
-    public Seller getSeller() {
-        return seller;
-    }
-
-    public void setSeller(Seller seller) {
-        this.seller = seller;
-    }
 }
