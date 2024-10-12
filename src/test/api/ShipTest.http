@@ -1,0 +1,12 @@
+###GET all ships
+GET localhost:8080/api/ships
+
+###POST new ship
+POST http://localhost:8080/api/ships
+Content-Type: application/json
+
+{
+  "vesselNumber": "PO12345",
+  "name": "VN98768",
+  "arrivalTime": "2024-09-29T00:00:00"
+}

@@ -18,6 +18,9 @@ public class PurchaseOrder {
     private String poNumber;
     private String vesselNumber;
 
+    @ManyToOne
+    private Ship ship;
+
     public PurchaseOrder(String poNumber, String vesselNumber) {
         this.poNumber = poNumber;
         this.vesselNumber = vesselNumber;
@@ -43,4 +46,11 @@ public class PurchaseOrder {
         this.vesselNumber = vesselNumber;
     }
 
+    public Ship getShip() {
+        return ship;
+    }
+
+    public void setShip(Ship ship) {
+        this.ship = ship;
+    }
 }

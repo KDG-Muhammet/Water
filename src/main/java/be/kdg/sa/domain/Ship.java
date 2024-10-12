@@ -3,26 +3,43 @@ package be.kdg.sa.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 public class Ship {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID uuid;
     private String vesselNumber;
     private String name;
     private Date arrivalTime;
 
+    @OneToMany(mappedBy = "ship", cascade = CascadeType.ALL)
+    private List<PurchaseOrder> purchaseOrder;
 
-    public int getId() {
-        return id;
+    @OneToOne
+    private DokOperation dokOperation;
+
+    protected Ship() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Ship(String vesselNumber, String name, Date arrivalTime) {
+        this.vesselNumber = vesselNumber;
+        this.name = name;
+        this.arrivalTime = arrivalTime;
+        this.purchaseOrder = new ArrayList<>();
+    }
+
+    public UUID getId() {
+        return uuid;
+    }
+
+    public void setId(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public String getVesselNumber() {
@@ -47,5 +64,22 @@ public class Ship {
 
     public void setArrivalTime(Date arrivalTime) {
         this.arrivalTime = arrivalTime;
+    }
+
+
+    public List<PurchaseOrder> getPurchaseOrder() {
+        return purchaseOrder;
+    }
+
+    public void setPurchaseOrder(List<PurchaseOrder> purchaseOrder) {
+        this.purchaseOrder = purchaseOrder;
+    }
+
+    public DokOperation getDokOperation() {
+        return dokOperation;
+    }
+
+    public void setDokOperation(DokOperation dokOperation) {
+        this.dokOperation = dokOperation;
     }
 }

@@ -1,18 +1,16 @@
 package be.kdg.sa.controller.dto;
 
-import be.kdg.sa.domain.PurchaseOrder;
-
-public class PurchaseOrderDto {
+public class DoDto {
     private String poNumber;
     private String vesselNumber;
 
 
-    public PurchaseOrderDto(PurchaseOrder purchaseOrder) {
-        this.poNumber = purchaseOrder.getPoNumber();
-        this.vesselNumber = purchaseOrder.getVesselNumber();
+    public DoDto(String poNumber, String vesselNumber) {
+        this.poNumber = poNumber;
+        this.vesselNumber = vesselNumber;
     }
 
-    public PurchaseOrderDto() {
+    public DoDto() {
     }
 
     public String getPoNumber() {
@@ -31,4 +29,3 @@ public class PurchaseOrderDto {
         this.vesselNumber = vesselNumber;
     }
 }
-

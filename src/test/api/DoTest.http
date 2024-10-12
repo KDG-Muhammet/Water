@@ -1,0 +1,8 @@
+###POST new do
+POST http://localhost:8080/api/dok-operations
+Content-Type: application/json
+
+{
+  "poNumber": "PO1235",
+  "vesselNumber": "VN98768"
+}
