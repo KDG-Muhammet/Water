@@ -6,12 +6,6 @@ public class PurchaseOrderDto {
     private String poNumber;
     private String vesselNumber;
 
-
-    public PurchaseOrderDto(PurchaseOrder purchaseOrder) {
-        this.poNumber = purchaseOrder.getPoNumber();
-        this.vesselNumber = purchaseOrder.getVesselNumber();
-    }
-
     public PurchaseOrderDto() {
     }
 

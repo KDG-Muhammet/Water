@@ -1,25 +1,38 @@
 package be.kdg.sa.domain;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.UUID;
 
+import be.kdg.sa.domain.enums.Status;
 import jakarta.persistence.*;
 
 @Entity
 public class InspectionOperation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID uuid;
     private LocalDateTime inspectionTime;
     private String inspectionNumber;
+    private Status inspectionStatus;
+    @OneToOne
+    private DokOperation dokOperation;
 
     public InspectionOperation(LocalDateTime inspectionTime, String inspectionNumber) {
         this.inspectionTime = inspectionTime;
         this.inspectionNumber = inspectionNumber;
     }
 
-    public InspectionOperation() {
+    protected InspectionOperation() {
 
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public LocalDateTime getInspectionTime() {
@@ -36,5 +49,21 @@ public class InspectionOperation {
 
     public void setInspectionNumber(String inspectionNumber) {
         this.inspectionNumber = inspectionNumber;
+    }
+
+    public Status getInspectionStatus() {
+        return inspectionStatus;
+    }
+
+    public void setInspectionStatus(Status inspectionStatus) {
+        this.inspectionStatus = inspectionStatus;
+    }
+
+    public DokOperation getDokOperation() {
+        return dokOperation;
+    }
+
+    public void setDokOperation(DokOperation dokOperation) {
+        this.dokOperation = dokOperation;
     }
 }

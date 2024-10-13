@@ -19,7 +19,7 @@ public class BunkerOperation {
         this.endTime = startTime.plusHours(4); // bo duurt 4 uur
     }
 
-    public BunkerOperation() {
+    protected BunkerOperation() {
 
     }
 

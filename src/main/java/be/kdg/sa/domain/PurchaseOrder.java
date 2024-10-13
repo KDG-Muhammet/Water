@@ -26,7 +26,7 @@ public class PurchaseOrder {
         this.vesselNumber = vesselNumber;
     }
 
-    public PurchaseOrder() {
+    protected PurchaseOrder() {
     }
 
     public String getPoNumber() {

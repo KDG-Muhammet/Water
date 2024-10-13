@@ -10,7 +10,6 @@ public class ShipDto {
     private String name;
     private Date arrivalTime;
 
-
     public ShipDto(Ship ship) {
         this.vesselNumber = ship.getVesselNumber();
         this.name = ship.getName();

@@ -1,4 +1,4 @@
-###GET all PurchaseOrders
+###GET all PurchaseOrders and make ships
 GET localhost:8080/api/purchaseOrders
 
 

@@ -1,0 +1,15 @@
+###POST input captain to make e do
+POST http://localhost:8080/api/dok-operations
+Content-Type: application/json
+
+{
+  "poNumber": "PO1235",
+  "vesselNumber": "test_vessel_number"
+}
+
+###GET all inspection operations
+GET localhost:8080/api/ioOperations
+
+
+###PUT start inspection of a ship with inspection number
+PUT localhost:8080/api/ioOperations/IO-test_vessel_number

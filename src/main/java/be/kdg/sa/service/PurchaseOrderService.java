@@ -33,7 +33,7 @@ public class PurchaseOrderService {
         purchaseOrders.forEach(purchaseOrder -> {
             if (purchaseOrder.getShip() == null) {
                 Ship ship = shipService.findShipByVesselNumberIfExist(purchaseOrder.getVesselNumber())
-                        .orElseGet(() -> shipService.addShip(new Ship(purchaseOrder.getVesselNumber(), "test", new Date())));
+                        .orElseGet(() -> shipService.createShip(new Ship(purchaseOrder.getVesselNumber(), "test", new Date())));
                 purchaseOrder.setShip(ship);
                 ship.getPurchaseOrder().add(purchaseOrder);
             }
@@ -47,7 +47,8 @@ public class PurchaseOrderService {
         return modelMapper.map(purchaseOrder, PurchaseOrderDto.class);
     }
 
-    public void addOrder(PurchaseOrderDto purchaseOrderDto) {
+    @Transactional
+    public void createOrder(PurchaseOrderDto purchaseOrderDto) {
         PurchaseOrder purchaseOrder = new PurchaseOrder(purchaseOrderDto.getPoNumber(),purchaseOrderDto.getVesselNumber());
         logger.info("receving po: " + "ponumber: " + purchaseOrderDto.getPoNumber() +  " vesselNumber: " +purchaseOrderDto.getVesselNumber());
 

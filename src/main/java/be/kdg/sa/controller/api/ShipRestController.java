@@ -18,8 +18,8 @@ public class ShipRestController {
     }
 
     @GetMapping("")
-    public Collection<ShipDto> getPurchaseOrders() {
-        return shipService.getAllShips();
+    public Collection<ShipDto> getShips() {
+        return shipService.findAllShips();
 
     }
 

@@ -1,10 +1,9 @@
 package be.kdg.sa.domain;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
+import be.kdg.sa.domain.enums.Status;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,7 +15,7 @@ public class DokOperation {
     private LocalDateTime arrivalTime;
     private LocalDateTime departureTime;
     @Enumerated(EnumType.STRING)
-    private DockStatus status;
+    private Status status;
     @OneToOne
     private Ship ship;
 
@@ -31,10 +30,10 @@ public class DokOperation {
         this.arrivalTime = arrivalTime;
         this.departureTime = departureTime;
         this.ship = ship;
-        this.status = DockStatus.PENDING;
+        this.status = Status.PENDING;
     }
 
-    public DokOperation() {
+    protected DokOperation() {
 
     }
 
@@ -62,11 +61,11 @@ public class DokOperation {
         this.departureTime = departureTime;
     }
 
-    public DockStatus getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(DockStatus status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

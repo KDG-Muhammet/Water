@@ -4,6 +4,7 @@ import be.kdg.sa.controller.dto.ShipDto;
 import be.kdg.sa.domain.Ship;
 import be.kdg.sa.repository.ShipRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,7 +20,19 @@ public class ShipService {
         this.shipRepository = shipRepository;
     }
 
-    public Collection<ShipDto> getAllShips() {
+
+    @Transactional(readOnly = true)
+    public Optional<Ship> findShipByVesselNumberIfExist(String vesselNumber) {
+        return shipRepository.findShipByVesselNumber(vesselNumber);
+    }
+
+    @Transactional(readOnly = true)
+    public Ship findShipByVesselNumber(String vesselNumber) {
+        return shipRepository.getShipByVesselNumber(vesselNumber);
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<ShipDto> findAllShips() {
         Collection<Ship> ships = shipRepository.findAll();
         List<ShipDto> shipDtos = new ArrayList<>();
 
@@ -31,15 +44,10 @@ public class ShipService {
         return shipDtos;
 
     }
-    public Ship addShip(Ship ship) {
+    @Transactional
+    public Ship createShip(Ship ship) {
        return shipRepository.save(new Ship(ship.getVesselNumber(), ship.getName(), ship.getArrivalTime()));
     }
 
-    public Optional<Ship> findShipByVesselNumberIfExist(String vesselNumber) {
-        return shipRepository.findShipByVesselNumber(vesselNumber);
-    }
 
-    public Ship findShipByVesselNumber(String vesselNumber) {
-        return shipRepository.getShipByVesselNumber(vesselNumber);
-    }
 }
