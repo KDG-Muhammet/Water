@@ -2,6 +2,7 @@ package be.kdg.sa.service;
 
 
 import be.kdg.sa.controller.dto.DoDto;
+import be.kdg.sa.domain.BunkerOperation;
 import be.kdg.sa.domain.DokOperation;
 import be.kdg.sa.domain.InspectionOperation;
 import be.kdg.sa.domain.Ship;
@@ -22,12 +23,14 @@ public class DOService {
     private final DORepository doRepository;
     private final ShipService shipService;
     private final IOService ioService;
+    private final BOService boService;
     private static final Logger logger = LoggerFactory.getLogger(PurchaseOrderService.class);
 
-    public DOService(DORepository doRepository, ShipService shipService, IOService ioService) {
+    public DOService(DORepository doRepository, ShipService shipService, IOService ioService, BOService boService) {
         this.doRepository = doRepository;
         this.shipService = shipService;
         this.ioService = ioService;
+        this.boService = boService;
     }
 
     @Transactional
@@ -40,36 +43,17 @@ public class DOService {
         ship.setDokOperation(dockOperation);
 
         InspectionOperation inspection = new InspectionOperation(LocalDateTime.now(),generateInspectionNumber(doDto.getVesselNumber()));
-        inspection.setInspectionStatus(Status.PENDING);
+        BunkerOperation bunkering = new BunkerOperation(doDto.getVesselNumber());
 
         dockOperation.setInspectionOperation(inspection);
         inspection.setDokOperation(dockOperation);
+        dockOperation.setBunkerOperation(bunkering);
+        bunkering.setDokOperation(dockOperation);
+
         ioService.createIo(inspection);
+        boService.createBo(bunkering);
         doRepository.save(dockOperation);
 
     }
-//    public DokOperation processArrival(String poId, String vesselNumber, Date arrivalTime) {
-//        DokOperation dokOperation = new DokOperation();
-//        dokOperation.setPOid(Integer.parseInt(poId));
-//        dokOperation.setVesselNumber(vesselNumber);
-//        dokOperation.setArrivalTime(arrivalTime);
-//
-//        DokOperation savedDO = doRepository.save(dokOperation);
-//
-//
-//        InspectionOperation inspection = new InspectionOperation();
-//        inspection.setDate(new Date());
-//        ioRepository.save(inspection);
-//
-//
-//        BunkerOperation bunkering = new BunkerOperation();
-//        bunkering.setVesselNumber(vesselNumber);
-//        bunkering.setTime((Time) new Date());
-//        boRepository.save(bunkering);
-//
-//
-//
-//        return savedDO;
-//    }
 
 }

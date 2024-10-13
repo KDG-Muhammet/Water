@@ -14,6 +14,7 @@ public class InspectionOperation {
     private UUID uuid;
     private LocalDateTime inspectionTime;
     private String inspectionNumber;
+    @Enumerated(EnumType.STRING)
     private Status inspectionStatus;
     @OneToOne
     private DokOperation dokOperation;
@@ -21,6 +22,8 @@ public class InspectionOperation {
     public InspectionOperation(LocalDateTime inspectionTime, String inspectionNumber) {
         this.inspectionTime = inspectionTime;
         this.inspectionNumber = inspectionNumber;
+        this.inspectionStatus = Status.PENDING;
+
     }
 
     protected InspectionOperation() {
