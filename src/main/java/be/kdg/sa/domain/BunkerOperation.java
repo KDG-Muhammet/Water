@@ -1,6 +1,5 @@
 package be.kdg.sa.domain;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

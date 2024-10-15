@@ -1,5 +1,5 @@
 ###POST input captain to make e do
-POST http://localhost:8080/api/dok-operations
+POST http://localhost:8080/api/dokOperations
 Content-Type: application/json
 
 {
@@ -19,3 +19,6 @@ GET localhost:8080/api/boOperations
 
 ###PUT start bunkering of a ship with veseel number
 PUT localhost:8080/api/boOperations/test_vessel_number
+
+###GET dok operation for captain with vessel number
+GET localhost:8080/api/dokOperations/test_vessel_number

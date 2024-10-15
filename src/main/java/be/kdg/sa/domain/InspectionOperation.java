@@ -2,7 +2,6 @@ package be.kdg.sa.domain;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
 import be.kdg.sa.domain.enums.Status;
 import jakarta.persistence.*;
 

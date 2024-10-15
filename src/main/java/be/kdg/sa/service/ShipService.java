@@ -3,6 +3,8 @@ package be.kdg.sa.service;
 import be.kdg.sa.controller.dto.ShipDto;
 import be.kdg.sa.domain.Ship;
 import be.kdg.sa.repository.ShipRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,7 @@ public class ShipService {
     public ShipService(ShipRepository shipRepository) {
         this.shipRepository = shipRepository;
     }
+    private static final Logger logger = LoggerFactory.getLogger(PurchaseOrderService.class);
 
 
     @Transactional(readOnly = true)
@@ -46,7 +49,8 @@ public class ShipService {
     }
     @Transactional
     public Ship createShip(Ship ship) {
-       return shipRepository.save(new Ship(ship.getVesselNumber(), ship.getName(), ship.getArrivalTime()));
+        logger.info("Creating ship with vessel number: {}", ship.getVesselNumber());
+        return shipRepository.save(new Ship(ship.getVesselNumber(), ship.getName(), ship.getArrivalTime()));
     }
 
 

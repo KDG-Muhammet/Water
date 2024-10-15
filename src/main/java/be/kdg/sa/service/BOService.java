@@ -1,9 +1,7 @@
 package be.kdg.sa.service;
 
 import be.kdg.sa.controller.dto.BODto;
-import be.kdg.sa.controller.dto.IODto;
 import be.kdg.sa.domain.BunkerOperation;
-import be.kdg.sa.domain.InspectionOperation;
 import be.kdg.sa.domain.enums.Status;
 import be.kdg.sa.repository.BORepository;
 import org.modelmapper.ModelMapper;
@@ -12,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -22,20 +19,17 @@ public class BOService {
 
     private final BORepository boRepository;
     private final ModelMapper modelMapper;
-
     private static final Logger logger = LoggerFactory.getLogger(PurchaseOrderService.class);
-
     private static final int MAX_BUNKER_OPERATIONS = 6;
 
     public BOService(BORepository boRepository, ModelMapper modelMapper) {
         this.boRepository = boRepository;
         this.modelMapper = modelMapper;
     }
-
     @Transactional
     public void createBo(BunkerOperation bunkerOperation) {
+        logger.info("Creating bunkerOperation with vessel number: {}", bunkerOperation.getVesselNumber());
         boRepository.save(bunkerOperation);
-
     }
 
     @Transactional(readOnly = true)
@@ -62,6 +56,7 @@ public class BOService {
 
         BunkerOperation bunkerOperation = boRepository.findBunkerOperationByVesselNumber(vesselNumber);
         bunkerOperation.setBunkerStatus(Status.BUNKER_SUCCESS);
+        logger.info("bunkerOperation success with vesselnumber: {}", bunkerOperation.getVesselNumber());
         bunkerOperation.setStartTime(LocalDateTime.now());
         bunkerOperation.setEndTime(LocalDateTime.now().plusHours(4));
         boRepository.save(bunkerOperation);

@@ -1,13 +1,9 @@
 package be.kdg.sa.controller.dto;
 
-import be.kdg.sa.domain.PurchaseOrder;
 
 public class PurchaseOrderDto {
     private String poNumber;
     private String vesselNumber;
-
-    public PurchaseOrderDto() {
-    }
 
     public String getPoNumber() {
         return poNumber;

@@ -26,9 +26,8 @@ public class DokOperation {
     private BunkerOperation bunkerOperation;
 
 
-    public DokOperation(LocalDateTime arrivalTime, Ship ship, LocalDateTime departureTime) {
+    public DokOperation(LocalDateTime arrivalTime, Ship ship) {
         this.arrivalTime = arrivalTime;
-        this.departureTime = departureTime;
         this.ship = ship;
         this.status = Status.PENDING;
     }

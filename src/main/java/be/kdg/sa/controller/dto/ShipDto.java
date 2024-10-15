@@ -16,10 +16,6 @@ public class ShipDto {
         this.arrivalTime = ship.getArrivalTime();
     }
 
-    public ShipDto() {
-
-    }
-
     public String getVesselNumber() {
         return vesselNumber;
     }

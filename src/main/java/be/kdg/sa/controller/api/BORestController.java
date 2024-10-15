@@ -2,7 +2,6 @@ package be.kdg.sa.controller.api;
 
 
 import be.kdg.sa.controller.dto.BODto;
-import be.kdg.sa.controller.dto.IODto;
 import be.kdg.sa.service.BOService;
 import org.springframework.web.bind.annotation.*;
 

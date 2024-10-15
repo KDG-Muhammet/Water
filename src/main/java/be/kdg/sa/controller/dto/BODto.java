@@ -1,8 +1,6 @@
 package be.kdg.sa.controller.dto;
 
 import be.kdg.sa.domain.enums.Status;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +10,6 @@ public class BODto {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Status bunkerStatus;
-
 
     public String getVesselNumber() {
         return vesselNumber;
