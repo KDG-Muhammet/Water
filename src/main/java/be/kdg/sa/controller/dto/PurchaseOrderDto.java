@@ -5,6 +5,14 @@ public class PurchaseOrderDto {
     private String poNumber;
     private String vesselNumber;
 
+    public PurchaseOrderDto() {
+    }
+
+    public PurchaseOrderDto(String vesselNumber, String poNumber) {
+        this.poNumber = poNumber;
+        this.vesselNumber = vesselNumber;
+    }
+
     public String getPoNumber() {
         return poNumber;
     }

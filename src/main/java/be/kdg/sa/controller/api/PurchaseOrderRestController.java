@@ -1,7 +1,7 @@
 package be.kdg.sa.controller.api;
 
 import be.kdg.sa.controller.dto.PurchaseOrderDto;
-import be.kdg.sa.service.PurchaseOrderService;
+import be.kdg.sa.service.po.PurchaseOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

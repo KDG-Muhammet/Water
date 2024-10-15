@@ -2,7 +2,7 @@ package be.kdg.sa.controller.api;
 
 import be.kdg.sa.controller.dto.DoDto;
 import be.kdg.sa.controller.dto.OperationsDto;
-import be.kdg.sa.service.DOService;
+import be.kdg.sa.service.dokOperation.DOService;
 import be.kdg.sa.service.dokOperation.CreateDoService;
 import org.springframework.web.bind.annotation.*;
 

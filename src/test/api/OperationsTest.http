@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "poNumber": "PO1235",
-  "vesselNumber": "test_vessel_number"
+  "vesselNumber": "VN98768"
 }
 
 ###GET all inspection operations by inspection officier
@@ -12,13 +12,13 @@ GET localhost:8080/api/ioOperations
 
 
 ###PUT start inspection of a ship with inspection number
-PUT localhost:8080/api/ioOperations/IO-test_vessel_number
+PUT localhost:8080/api/ioOperations/IO-VN98768
 
 ###GET all bunker operations by bunker officier
 GET localhost:8080/api/boOperations
 
 ###PUT start bunkering of a ship with veseel number
-PUT localhost:8080/api/boOperations/test_vessel_number
+PUT localhost:8080/api/boOperations/VN98768
 
 ###GET dok operation for captain with vessel number
-GET localhost:8080/api/dokOperations/test_vessel_number
+GET localhost:8080/api/dokOperations/VN98768

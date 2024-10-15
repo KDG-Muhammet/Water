@@ -4,6 +4,7 @@ import be.kdg.sa.controller.dto.BODto;
 import be.kdg.sa.domain.BunkerOperation;
 import be.kdg.sa.domain.enums.Status;
 import be.kdg.sa.repository.BORepository;
+import be.kdg.sa.service.po.PurchaseOrderService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,15 +51,14 @@ public class BOService {
         LocalDateTime endOfDay = startOfDay.plusDays(1);
         long bunkerCountToday = boRepository.countByStartTimeBetween(startOfDay, endOfDay);
         if (bunkerCountToday >= MAX_BUNKER_OPERATIONS) {
-            logger.warn("Max bunker operations reached for today ({} operations)", MAX_BUNKER_OPERATIONS);
-            throw new IllegalStateException("Max bunker operations reached for today");
+            logger.error("Max bunker operations reached for today ({} operations)", MAX_BUNKER_OPERATIONS);
+        } else {
+            BunkerOperation bunkerOperation = boRepository.findBunkerOperationByVesselNumber(vesselNumber);
+            bunkerOperation.setBunkerStatus(Status.BUNKER_SUCCESS);
+            logger.info("bunkerOperation success with vesselnumber: {}", bunkerOperation.getVesselNumber());
+            bunkerOperation.setStartTime(LocalDateTime.now());
+            bunkerOperation.setEndTime(LocalDateTime.now().plusHours(4));
+            boRepository.save(bunkerOperation);
         }
-
-        BunkerOperation bunkerOperation = boRepository.findBunkerOperationByVesselNumber(vesselNumber);
-        bunkerOperation.setBunkerStatus(Status.BUNKER_SUCCESS);
-        logger.info("bunkerOperation success with vesselnumber: {}", bunkerOperation.getVesselNumber());
-        bunkerOperation.setStartTime(LocalDateTime.now());
-        bunkerOperation.setEndTime(LocalDateTime.now().plusHours(4));
-        boRepository.save(bunkerOperation);
     }
 }

@@ -1,8 +1,9 @@
-package be.kdg.sa.service;
+package be.kdg.sa.service.po;
 
 import be.kdg.sa.controller.dto.PurchaseOrderDto;
 import be.kdg.sa.domain.*;
 import be.kdg.sa.repository.PurchaseOrderRepository;
+import be.kdg.sa.service.ShipService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,7 @@ public class PurchaseOrderService {
                 Ship ship = shipService.findShipByVesselNumberIfExist(purchaseOrder.getVesselNumber())
                         .orElseGet(() -> shipService.createShip(new Ship(purchaseOrder.getVesselNumber(), "test", new Date())));
                 purchaseOrder.setShip(ship);
-                ship.getPurchaseOrder().add(purchaseOrder);
+                ship.setPurchaseOrder(purchaseOrder);
             }
         });
         return purchaseOrders.stream()

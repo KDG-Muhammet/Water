@@ -1,4 +1,4 @@
-package be.kdg.sa.service;
+package be.kdg.sa.service.dokOperation;
 
 
 import be.kdg.sa.controller.dto.*;
@@ -7,6 +7,8 @@ import be.kdg.sa.domain.DokOperation;
 import be.kdg.sa.domain.InspectionOperation;
 import be.kdg.sa.domain.enums.Status;
 import be.kdg.sa.repository.DORepository;
+import be.kdg.sa.service.po.PurchaseOrderSenderService;
+import be.kdg.sa.service.po.PurchaseOrderService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,26 +22,22 @@ import java.time.LocalDateTime;
 public class DOService {
 
     private final DORepository doRepository;
+    private final PurchaseOrderSenderService purchaseOrderSenderService;
     private final ModelMapper modelMapper;
 
     private static final Logger logger = LoggerFactory.getLogger(PurchaseOrderService.class);
 
-    public DOService(DORepository doRepository, ModelMapper modelMapper) {
+    public DOService(DORepository doRepository, PurchaseOrderSenderService purchaseOrderSenderService, ModelMapper modelMapper) {
         this.doRepository = doRepository;
+        this.purchaseOrderSenderService = purchaseOrderSenderService;
         this.modelMapper = modelMapper;
     }
 
     @Transactional
     public OperationsDto findDoByVesselNumber(String vesselNumber) {
         DokOperation dokOperation = doRepository.findDokOperationByShipVesselNumber(vesselNumber);
-        if (dokOperation == null) {
-            throw new IllegalArgumentException("Dok operatie niet gevonden voor vessel nummer: " + vesselNumber);
-        }
         InspectionOperation inspectionOperation = dokOperation.getInspectionOperation();
         BunkerOperation bunkerOperation = dokOperation.getBunkerOperation();
-        if (inspectionOperation == null || bunkerOperation == null) {
-            throw new IllegalStateException("Incompleet dok operatie: zowel IO als BO moeten aanwezig zijn.");
-        }
 
         IODto ioDto = modelMapper.map(inspectionOperation, IODto.class);
         BODto boDto = modelMapper.map(bunkerOperation, BODto.class);
@@ -52,12 +50,15 @@ public class DOService {
             operationsDto.setStatus(dokOperation.getStatus());
             operationsDto.setDepartureTime(dokOperation.getDepartureTime());
             logger.info("Dok operatie compleet voor vessel nummer: {}", vesselNumber);
+
+            purchaseOrderSenderService.sendFulfilledPOToWarehouse(dokOperation.getShip().getPurchaseOrder());
         } else {
             operationsDto.setStatus(dokOperation.getStatus());
             logger.info("Dok operatie nog niet compleet voor vessel nummer: {}", vesselNumber);
         }
         return operationsDto;
     }
+
 
     public void create(DokOperation dockOperation) {
         logger.info("Creating dock: {}", dockOperation);

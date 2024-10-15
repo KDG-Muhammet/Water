@@ -14,7 +14,7 @@ public class PurchaseOrder {
     private String poNumber;
     private String vesselNumber;
 
-    @ManyToOne
+    @OneToOne
     private Ship ship;
 
     public PurchaseOrder(String poNumber, String vesselNumber) {

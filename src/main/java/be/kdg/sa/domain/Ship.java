@@ -1,9 +1,7 @@
 package be.kdg.sa.domain;
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,8 +14,8 @@ public class Ship {
     private String name;
     private Date arrivalTime;
 
-    @OneToMany(mappedBy = "ship", cascade = CascadeType.ALL)
-    private List<PurchaseOrder> purchaseOrder;
+    @OneToOne(mappedBy = "ship", cascade = CascadeType.ALL)
+    private PurchaseOrder purchaseOrder;
 
     @OneToOne
     private DokOperation dokOperation;
@@ -29,7 +27,6 @@ public class Ship {
         this.vesselNumber = vesselNumber;
         this.name = name;
         this.arrivalTime = arrivalTime;
-        this.purchaseOrder = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -65,11 +62,11 @@ public class Ship {
     }
 
 
-    public List<PurchaseOrder> getPurchaseOrder() {
+    public PurchaseOrder getPurchaseOrder() {
         return purchaseOrder;
     }
 
-    public void setPurchaseOrder(List<PurchaseOrder> purchaseOrder) {
+    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
         this.purchaseOrder = purchaseOrder;
     }
 
