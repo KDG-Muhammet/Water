@@ -4,6 +4,7 @@ import be.kdg.sa.controller.dto.DoDto;
 import be.kdg.sa.controller.dto.OperationsDto;
 import be.kdg.sa.service.dokOperation.DOService;
 import be.kdg.sa.service.dokOperation.CreateDoService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,12 +22,14 @@ public class DORestController {
     }
 
     @GetMapping("/{vesselNumber}")
-    public OperationsDto getPurchaseOrder(@PathVariable String vesselNumber) {
+    @PreAuthorize("hasAuthority('captain')")
+    public OperationsDto getDo(@PathVariable String vesselNumber) {
         return doService.findDoByVesselNumber(vesselNumber);
     }
 
 
     @PostMapping("")
+    @PreAuthorize("hasAuthority('captain')")
     public void addDokOperation(@RequestBody DoDto doDto) {
         createDoService.createDo(doDto);
     }

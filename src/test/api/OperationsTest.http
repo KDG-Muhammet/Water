@@ -1,24 +1,64 @@
+### Get access token with captain
+POST http://localhost:8180/realms/Kdg/protocol/openid-connect/token HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+client_id=water&client_secret=Q2cIX0slapyB10L8wCFePryfuhUmi2uR&username=captain&password=password&grant_type=password&scope=openid
+
+//saving the access token
+> {%
+    client.global.set("access_token_captain", response.body.access_token);
+%}
+
 ###POST input captain to make e do
 POST http://localhost:8080/api/dokOperations
 Content-Type: application/json
+Authorization: Bearer {{access_token_captain}}
 
 {
   "poNumber": "PO1235",
-  "vesselNumber": "VN98768"
+  "vesselNumber": "test_vessel_number"
 }
+
+###GET dok operation for captain with vessel number
+GET localhost:8080/api/dokOperations/test_vessel_number
+Authorization: Bearer {{access_token_captain}}
+
+### Get access token with inspection officier
+POST http://localhost:8180/realms/Kdg/protocol/openid-connect/token HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+client_id=water&client_secret=Q2cIX0slapyB10L8wCFePryfuhUmi2uR&username=inspection&password=password&grant_type=password&scope=openid
+
+//saving the access token
+> {%
+    client.global.set("access_token_inspection", response.body.access_token);
+%}
 
 ###GET all inspection operations by inspection officier
 GET localhost:8080/api/ioOperations
-
+Authorization: Bearer {{access_token_inspection}}
 
 ###PUT start inspection of a ship with inspection number
-PUT localhost:8080/api/ioOperations/IO-VN98768
+PUT localhost:8080/api/ioOperations/IO-test_vessel_number
+Authorization: Bearer {{access_token_inspection}}
+
+
+### Get access token with bunker officier
+POST http://localhost:8180/realms/Kdg/protocol/openid-connect/token HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+client_id=water&client_secret=Q2cIX0slapyB10L8wCFePryfuhUmi2uR&username=bunker&password=password&grant_type=password&scope=openid
+
+//saving the access token
+> {%
+    client.global.set("access_token_bunker", response.body.access_token);
+%}
 
 ###GET all bunker operations by bunker officier
 GET localhost:8080/api/boOperations
+Authorization: Bearer {{access_token_bunker}}
 
 ###PUT start bunkering of a ship with veseel number
-PUT localhost:8080/api/boOperations/VN98768
+PUT localhost:8080/api/boOperations/test_vessel_number
+Authorization: Bearer {{access_token_bunker}}
 
-###GET dok operation for captain with vessel number
-GET localhost:8080/api/dokOperations/VN98768
