@@ -1,9 +1,10 @@
 package be.kdg.sa.service.po;
 
 import be.kdg.sa.controller.dto.PurchaseOrderDto;
-import be.kdg.sa.domain.PurchaseOrder;
+import be.kdg.sa.domain.ShippingOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -11,18 +12,21 @@ import org.springframework.web.client.RestTemplate;
 public class PurchaseOrderSenderService {
 
     private final RestTemplate restTemplate;
-    private static final Logger logger = LoggerFactory.getLogger(PurchaseOrderService.class);
-    private static final String WAREHOUSE_APP_URL = "http://localhost:8081/api/purchaseOrder";
+    private static final Logger logger = LoggerFactory.getLogger(ShippingOrderService.class);
+
+    @Value("${spring.application.warehouse.url}")
+    private String WAREHOUSE_URL;
 
 
     public PurchaseOrderSenderService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
-    public void sendFulfilledPOToWarehouse(PurchaseOrder purchaseOrder) {
-        PurchaseOrderDto requestDto = new PurchaseOrderDto(purchaseOrder.getVesselNumber(), purchaseOrder.getPoNumber());
-        logger.info("sending po: " + "ponumber: " + purchaseOrder.getPoNumber() +  " vesselNumber: " + purchaseOrder.getVesselNumber());
+    public void sendFulfilledPOToWarehouse(ShippingOrder shippingOrder) {
+        PurchaseOrderDto requestDto = new PurchaseOrderDto(shippingOrder.getPoNumber());
+        logger.info("sending po: " + "ponumber: " + shippingOrder.getPoNumber());
+        String fullUrl = WAREHOUSE_URL + "/purchaseOrder";
 
-        restTemplate.postForEntity(WAREHOUSE_APP_URL, requestDto, String.class);
+        restTemplate.postForEntity(fullUrl, requestDto, String.class);
     }
 }

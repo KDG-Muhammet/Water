@@ -14,8 +14,8 @@ public class Ship {
     private String name;
     private Date arrivalTime;
 
-    @OneToOne(mappedBy = "ship", cascade = CascadeType.ALL)
-    private PurchaseOrder purchaseOrder;
+    @OneToOne
+    private ShippingOrder shippingOrder;
 
     @OneToOne
     private DokOperation dokOperation;
@@ -62,12 +62,12 @@ public class Ship {
     }
 
 
-    public PurchaseOrder getPurchaseOrder() {
-        return purchaseOrder;
+    public ShippingOrder getShippingOrder() {
+        return shippingOrder;
     }
 
-    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
-        this.purchaseOrder = purchaseOrder;
+    public void setShippingOrder(ShippingOrder shippingOrder) {
+        this.shippingOrder = shippingOrder;
     }
 
     public DokOperation getDokOperation() {

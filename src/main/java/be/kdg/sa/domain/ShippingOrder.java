@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
-public class PurchaseOrder {
+public class ShippingOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -12,17 +12,15 @@ public class PurchaseOrder {
 
     @Column(unique = true)
     private String poNumber;
-    private String vesselNumber;
 
     @OneToOne
     private Ship ship;
 
-    public PurchaseOrder(String poNumber, String vesselNumber) {
+    public ShippingOrder(String poNumber) {
         this.poNumber = poNumber;
-        this.vesselNumber = vesselNumber;
     }
 
-    protected PurchaseOrder() {
+    protected ShippingOrder() {
     }
 
     public String getPoNumber() {
@@ -31,15 +29,6 @@ public class PurchaseOrder {
 
     public void setPoNumber(String poNumber) {
         this.poNumber = poNumber;
-    }
-
-
-    public String getVesselNumber() {
-        return vesselNumber;
-    }
-
-    public void setVesselNumber(String vesselNumber) {
-        this.vesselNumber = vesselNumber;
     }
 
     public Ship getShip() {

@@ -9,13 +9,22 @@ client_id=water&client_secret=Q2cIX0slapyB10L8wCFePryfuhUmi2uR&username=captain&
     client.global.set("access_token_captain", response.body.access_token);
 %}
 
+###POST send po to kdg to expect a shipment soon.
+POST http://localhost:8080/api/shippingOrders
+Content-Type: application/json
+Authorization: Bearer {{access_token_captain}}
+
+{
+  "poNumber": "testpoNumber"
+}
+
 ###POST input captain to make e do
 POST http://localhost:8080/api/dokOperations
 Content-Type: application/json
 Authorization: Bearer {{access_token_captain}}
 
 {
-  "poNumber": "PO1235",
+  "poNumber": "testpoNumber",
   "vesselNumber": "test_vessel_number"
 }
 

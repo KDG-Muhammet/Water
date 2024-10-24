@@ -8,7 +8,7 @@ import be.kdg.sa.domain.InspectionOperation;
 import be.kdg.sa.domain.enums.Status;
 import be.kdg.sa.repository.DORepository;
 import be.kdg.sa.service.po.PurchaseOrderSenderService;
-import be.kdg.sa.service.po.PurchaseOrderService;
+import be.kdg.sa.service.po.ShippingOrderService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class DOService {
     private final PurchaseOrderSenderService purchaseOrderSenderService;
     private final ModelMapper modelMapper;
 
-    private static final Logger logger = LoggerFactory.getLogger(PurchaseOrderService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ShippingOrderService.class);
 
     public DOService(DORepository doRepository, PurchaseOrderSenderService purchaseOrderSenderService, ModelMapper modelMapper) {
         this.doRepository = doRepository;
@@ -51,7 +51,7 @@ public class DOService {
             operationsDto.setDepartureTime(dokOperation.getDepartureTime());
             logger.info("Dok operatie compleet voor vessel nummer: {}", vesselNumber);
 
-            purchaseOrderSenderService.sendFulfilledPOToWarehouse(dokOperation.getShip().getPurchaseOrder());
+            purchaseOrderSenderService.sendFulfilledPOToWarehouse(dokOperation.getShip().getShippingOrder());
         } else {
             operationsDto.setStatus(dokOperation.getStatus());
             logger.info("Dok operatie nog niet compleet voor vessel nummer: {}", vesselNumber);

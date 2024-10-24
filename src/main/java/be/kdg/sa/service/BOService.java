@@ -4,10 +4,11 @@ import be.kdg.sa.controller.dto.BODto;
 import be.kdg.sa.domain.BunkerOperation;
 import be.kdg.sa.domain.enums.Status;
 import be.kdg.sa.repository.BORepository;
-import be.kdg.sa.service.po.PurchaseOrderService;
+import be.kdg.sa.service.po.ShippingOrderService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +21,10 @@ public class BOService {
 
     private final BORepository boRepository;
     private final ModelMapper modelMapper;
-    private static final Logger logger = LoggerFactory.getLogger(PurchaseOrderService.class);
-    private static final int MAX_BUNKER_OPERATIONS = 6;
+    private static final Logger logger = LoggerFactory.getLogger(ShippingOrderService.class);
+
+    @Value("${maxbunker}")
+    private int MAX_BUNKER_OPERATIONS;
 
     public BOService(BORepository boRepository, ModelMapper modelMapper) {
         this.boRepository = boRepository;
