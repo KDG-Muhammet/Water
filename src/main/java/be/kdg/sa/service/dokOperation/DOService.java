@@ -8,7 +8,6 @@ import be.kdg.sa.domain.InspectionOperation;
 import be.kdg.sa.domain.enums.Status;
 import be.kdg.sa.repository.DORepository;
 import be.kdg.sa.service.po.PurchaseOrderSenderService;
-import be.kdg.sa.service.po.ShippingOrderService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +24,7 @@ public class DOService {
     private final PurchaseOrderSenderService purchaseOrderSenderService;
     private final ModelMapper modelMapper;
 
-    private static final Logger logger = LoggerFactory.getLogger(ShippingOrderService.class);
+    private static final Logger logger = LoggerFactory.getLogger(DOService.class);
 
     public DOService(DORepository doRepository, PurchaseOrderSenderService purchaseOrderSenderService, ModelMapper modelMapper) {
         this.doRepository = doRepository;

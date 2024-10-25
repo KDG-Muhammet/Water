@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 public class PurchaseOrderSenderService {
 
     private final RestTemplate restTemplate;
-    private static final Logger logger = LoggerFactory.getLogger(ShippingOrderService.class);
+    private static final Logger logger = LoggerFactory.getLogger(PurchaseOrderSenderService.class);
 
     @Value("${spring.application.warehouse.url}")
     private String WAREHOUSE_URL;

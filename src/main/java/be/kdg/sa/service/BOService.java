@@ -4,7 +4,6 @@ import be.kdg.sa.controller.dto.BODto;
 import be.kdg.sa.domain.BunkerOperation;
 import be.kdg.sa.domain.enums.Status;
 import be.kdg.sa.repository.BORepository;
-import be.kdg.sa.service.po.ShippingOrderService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +20,7 @@ public class BOService {
 
     private final BORepository boRepository;
     private final ModelMapper modelMapper;
-    private static final Logger logger = LoggerFactory.getLogger(ShippingOrderService.class);
+    private static final Logger logger = LoggerFactory.getLogger(BOService.class);
 
     @Value("${maxbunker}")
     private int MAX_BUNKER_OPERATIONS;
