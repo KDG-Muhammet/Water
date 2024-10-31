@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class ShippingOrderRestController {
 
     private final ShippingOrderService shippingOrderService;
-    private static final Logger logger = LoggerFactory.getLogger(ShippingOrderService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ShippingOrderRestController.class);
 
     public ShippingOrderRestController(ShippingOrderService shippingOrderService) {
         this.shippingOrderService = shippingOrderService;

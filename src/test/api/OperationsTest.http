@@ -10,7 +10,7 @@ client_id=water&client_secret=Q2cIX0slapyB10L8wCFePryfuhUmi2uR&username=captain&
 %}
 
 ###POST send po to kdg to expect a shipment soon.
-POST http://localhost:8080/api/shippingOrders
+POST http://localhost:8082/api/shippingOrders
 Content-Type: application/json
 Authorization: Bearer {{access_token_captain}}
 
@@ -19,7 +19,7 @@ Authorization: Bearer {{access_token_captain}}
 }
 
 ###POST input captain to make e do
-POST http://localhost:8080/api/dokOperations
+POST http://localhost:8082/api/dokOperations
 Content-Type: application/json
 Authorization: Bearer {{access_token_captain}}
 
@@ -29,7 +29,7 @@ Authorization: Bearer {{access_token_captain}}
 }
 
 ###GET dok operation for captain with vessel number
-GET localhost:8080/api/dokOperations/test_vessel_number
+GET localhost:8082/api/dokOperations/test_vessel_number
 Authorization: Bearer {{access_token_captain}}
 
 ### Get access token with inspection officier
@@ -44,11 +44,11 @@ client_id=water&client_secret=Q2cIX0slapyB10L8wCFePryfuhUmi2uR&username=inspecti
 %}
 
 ###GET all inspection operations by inspection officier
-GET localhost:8080/api/ioOperations
+GET localhost:8082/api/ioOperations
 Authorization: Bearer {{access_token_inspection}}
 
 ###PUT start inspection of a ship with inspection number
-PUT localhost:8080/api/ioOperations/IO-test_vessel_number
+PUT localhost:8082/api/ioOperations/IO-test_vessel_number
 Authorization: Bearer {{access_token_inspection}}
 
 
@@ -64,10 +64,10 @@ client_id=water&client_secret=Q2cIX0slapyB10L8wCFePryfuhUmi2uR&username=bunker&p
 %}
 
 ###GET all bunker operations by bunker officier
-GET localhost:8080/api/boOperations
+GET localhost:8082/api/boOperations
 Authorization: Bearer {{access_token_bunker}}
 
 ###PUT start bunkering of a ship with veseel number
-PUT localhost:8080/api/boOperations/test_vessel_number
+PUT localhost:8082/api/boOperations/test_vessel_number
 Authorization: Bearer {{access_token_bunker}}
 
