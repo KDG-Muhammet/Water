@@ -1,6 +1,6 @@
 # Water Service
 
-This repository is one of the three repositories (—Water, Land, and Warehouse—) that together form the MineralFlow logistics platform. 
+This repository is one of the three repositories ( Water, [Land](https://github.com/KDG-Muhammet/Land), and [Warehous](https://github.com/KDG-Muhammet/Warehous)) that together form the MineralFlow logistics platform. 
 Each repository runs as a separate Spring Boot application with its own database schema and communicates with the others through REST APIs.
 
 ## Overview
